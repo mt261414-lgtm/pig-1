@@ -8,6 +8,7 @@ interface NavbarProps {
   isMuted: boolean;
   setIsMuted: (muted: boolean) => void;
   onQuickRecord: () => void;
+  onOpenDeployModal: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -16,6 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   isMuted,
   setIsMuted,
   onQuickRecord,
+  onOpenDeployModal,
 }) => {
   const toggleSound = () => {
     sound.isMuted = !isMuted;
@@ -99,7 +101,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Zone 3: 1 Primary Action & Utilities */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2.5 shrink-0">
           <button
             type="button"
             onClick={toggleSound}
@@ -114,12 +116,23 @@ export const Navbar: React.FC<NavbarProps> = ({
             type="button"
             onClick={() => {
               sound.playClickPop();
+              onOpenDeployModal();
+            }}
+            className="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          >
+            Vercel 배포
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              sound.playClickPop();
               onQuickRecord();
             }}
-            className="px-4 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-98 rounded-lg shadow-sm transition-all flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
+            className="px-3.5 py-1.5 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-98 rounded-lg shadow-xs transition-all flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>오늘 식단 분석하기</span>
+            <span>식단 분석하기</span>
           </button>
         </div>
       </div>

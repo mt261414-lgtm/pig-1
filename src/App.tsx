@@ -7,12 +7,14 @@ import { PetSanctuary } from './components/PetSanctuary';
 import { FoodCamDiary } from './components/FoodCamDiary';
 import { WeeklyReport } from './components/WeeklyReport';
 import { OriginLabDiscussion } from './components/OriginLabDiscussion';
+import { VercelDeployModal } from './components/VercelDeployModal';
 
 export default function App() {
   const [pet, setPet] = useState<PetState>(loadPetState);
   const [mealLogs, setMealLogs] = useState<MealLogItem[]>(loadMealLogs);
   const [activeTab, setActiveTab] = useState<'pet' | 'cam' | 'report' | 'lab'>('pet');
   const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isDeployModalOpen, setIsDeployModalOpen] = useState<boolean>(false);
 
   // Sync state to local storage on changes
   useEffect(() => {
@@ -60,6 +62,7 @@ export default function App() {
         isMuted={isMuted}
         setIsMuted={setIsMuted}
         onQuickRecord={() => setActiveTab('cam')}
+        onOpenDeployModal={() => setIsDeployModalOpen(true)}
       />
 
       {/* Main Viewport Container */}
@@ -112,6 +115,12 @@ export default function App() {
         )}
       </main>
 
+      {/* Vercel & GitHub Deployment Guide Modal */}
+      <VercelDeployModal
+        isOpen={isDeployModalOpen}
+        onClose={() => setIsDeployModalOpen(false)}
+      />
+
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-6 mt-12 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -121,6 +130,17 @@ export default function App() {
             <span>AI 기반 식단 탄소 발자국 감지 &amp; 펫 육성 교육 플랫폼</span>
           </div>
           <div className="flex items-center gap-4 text-slate-400">
+            <button
+              type="button"
+              onClick={() => {
+                sound.playClickPop();
+                setIsDeployModalOpen(true);
+              }}
+              className="text-emerald-700 hover:text-emerald-800 font-medium underline cursor-pointer"
+            >
+              GitHub &amp; Vercel 배포 방법 안내
+            </button>
+            <span>·</span>
             <span>식품 LCA 기준: Our World in Data / Poore &amp; Nemecek (2018)</span>
           </div>
         </div>

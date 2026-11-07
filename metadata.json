@@ -1,0 +1,6 @@
+{
+  "name": "에코다이어트: AI 탄소 식단 & 펫 키우기",
+  "description": "음식 사진 AI 인식으로 탄소 발자국을 감지하고, 식단 관리를 통해 에코 펫을 육성하는 친환경 게임형 다이어리 플랫폼",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
